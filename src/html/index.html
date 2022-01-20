@@ -9,6 +9,10 @@
   </head>
   <body>
     @@include('./chunk/Header.html')
+    <div>
+      @@loop("./chunk/new-item.html",
+       '../../data/news.json')
+    </div>
     <div id="root"></div>
     @@include('./chunk/Footer.html')
   </body>
