@@ -4,9 +4,11 @@ const browSync = require('browser-sync').create()
 const plumber = require('gulp-plumber')
 const notify = require('gulp-notify')
 
+
 const fc = require('gulp-file-include')
 const min = require('gulp-htmlmin')
 const size = require('gulp-size')
+const del = require('del')
 
 const html = () => {
   return src('./src/html/*.*')
@@ -34,6 +36,12 @@ const server = () => {
     },
   })
 }
+// delet derectory
+
+const clear = () => {
+  return del('./public')
+}
+
 
 // watch
 const watcher = () => {
@@ -42,5 +50,6 @@ const watcher = () => {
 
 exports.html = html
 exports.watch = watcher
+exports.clear = clear
 
-exports.dev = series(html, parallel(watcher, server))
+exports.dev = series(clear, html, parallel(watcher, server))
